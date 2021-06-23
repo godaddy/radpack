@@ -1,0 +1,30 @@
+{
+  "private": true,
+  "name": "@radpack/example-context-lib",
+  "version": "1.0.0",
+  "description": "radpack example context library",
+  "main": "dist/radpack.json",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "rollup -c",
+    "watch": "nodemon --exec \"npm run build\""
+  },
+  "devDependencies": {
+    "@radpack/core": "^1.0.0",
+    "@radpack/rollup-plugin": "^1.0.0",
+    "dirsum": "^0.1.1",
+    "nodemon": "^2.0.7",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.47.0"
+  },
+  "optionalDependencies": {
+    "@radpack/example-logger-lib": "^1.0.0"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src/",
+      "rollup.config.js"
+    ]
+  },
+  "license": "MIT"
+}

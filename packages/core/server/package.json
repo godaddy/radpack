@@ -1,0 +1,5 @@
+{
+  "private": true,
+  "main": "../lib/server/index.js",
+  "module": "../src/server/index.js"
+}

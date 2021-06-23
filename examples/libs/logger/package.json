@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "name": "@radpack/example-logger-lib",
+  "version": "1.0.0",
+  "description": "radpack example logging library",
+  "main": "dist/radpack.json",
+  "scripts": {
+    "prebuild": "rimraf lib",
+    "build": "rollup -c",
+    "watch": "npm run build -- -w"
+  },
+  "devDependencies": {
+    "@radpack/core": "^1.0.0",
+    "@radpack/rollup-plugin": "^1.0.0",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.47.0"
+  },
+  "license": "MIT"
+}

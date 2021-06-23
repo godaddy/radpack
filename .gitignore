@@ -1,0 +1,12 @@
+# Env
+.idea
+.DS_Store
+
+# Build
+.nyc_output
+coverage
+lib
+dist
+
+# Node
+node_modules

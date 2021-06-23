@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "name": "@radpack/example-context-client",
+  "version": "1.0.0",
+  "description": "radpack example context client",
+  "scripts": {
+    "start": "radpack local --statics ../../ --open \"${RADPACK_STATICS}/clients/context/\""
+  },
+  "dependencies": {
+    "@radpack/cli": "^1.0.0",
+    "@radpack/client": "^1.0.0"
+  },
+  "optionalDependencies": {
+    "@radpack/example-context-lib": "^1.0.0",
+    "@radpack/example-logger-lib": "^1.0.0"
+  },
+  "license": "MIT"
+}

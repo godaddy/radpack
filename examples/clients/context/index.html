@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Context Client Example</title>
+    </head>
+    <body>
+        <script src="./node_modules/@radpack/client/lib/browser.js"></script>
+        <script>
+          // Used for logging
+          globalThis.start = Date.now();
+
+          // Register
+          radpack.register([
+            '../../libs/context/dist/radpack.json',
+            '../../libs/logger/dist/radpack.json'
+          ]);
+
+          ['a', 'b'].forEach(flag => {
+            // Apply context
+            const radpackFeature = radpack.withContext({ flag });
+
+            // Run
+            radpackFeature('@radpack/example-context-lib').then(({ default: run }) => run());
+          });
+        </script>
+    </body>
+</html>

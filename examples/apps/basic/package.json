@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "name": "@radpack/example-basic-app",
+  "version": "1.0.0",
+  "description": "radpack example application",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "dependencies": {
+    "@radpack/core": "^1.0.0",
+    "@radpack/server": "^1.0.0"
+  },
+  "optionalDependencies": {
+    "@radpack/example-basic-lib": "^1.0.0",
+    "@radpack/example-logger-lib": "^1.0.0"
+  },
+  "license": "MIT"
+}

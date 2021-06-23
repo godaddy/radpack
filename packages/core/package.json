@@ -1,0 +1,42 @@
+{
+  "name": "@radpack/core",
+  "version": "1.0.0",
+  "description": "Rapid Application Development Packaging Core",
+  "main": "./lib/index.js",
+  "module": "./src/index.js",
+  "exports": {
+    ".": {
+      "import": "./src/index.js",
+      "require": "./lib/index.js"
+    },
+    "./server": {
+      "import": "./src/server/index.js",
+      "require": "./lib/server/index.js"
+    }
+  },
+  "files": [
+    "src/",
+    "lib/",
+    "server/"
+  ],
+  "scripts": {
+    "prebuild": "rimraf lib",
+    "build": "babel src -d lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:godaddy/radpack.git",
+    "directory": "packages/core"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "cross-fetch": "^3.1.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.16",
+    "rimraf": "^3.0.2"
+  },
+  "license": "MIT"
+}

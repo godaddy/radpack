@@ -1,0 +1,13 @@
+export const WEBPACK_REQUIRE = `__webpack_require__`;
+export const RUNTIME_DYNAMIC = `${ WEBPACK_REQUIRE }.RAD`;
+export const RUNTIME_STATIC = `${ WEBPACK_REQUIRE }.RAD_S`;
+export const RUNTIME_MANIFEST_PROP = 'RAD_M';
+export const RUNTIME_MANIFEST = `${ WEBPACK_REQUIRE }.${ RUNTIME_MANIFEST_PROP }`;
+export const RUNTIME_MANIFEST_REGEX = new RegExp(`\\.${ RUNTIME_MANIFEST_PROP }([^\\w.])`);
+export const TARGET_NODE = 'node';
+export const TARGET_WEB = 'web';
+export const SUPPORTED_TARGETS = [TARGET_NODE, TARGET_WEB];
+export const HYDRATE = 'RADPACK_HYDRATE';
+export const OVERRIDES = 'RADPACK_OVERRIDES';
+export const MANIFEST = 'RADPACK_MANIFEST';
+export const JS_TYPES = ['javascript/auto', 'javascript/dynamic', 'javascript/esm'];

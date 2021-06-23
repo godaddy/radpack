@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "name": "@radpack/example-basic-client",
+  "version": "1.0.0",
+  "description": "radpack example client",
+  "scripts": {
+    "start": "radpack local --statics ../../ --open \"${RADPACK_STATICS}/clients/basic/\""
+  },
+  "dependencies": {
+    "@radpack/cli": "^1.0.0",
+    "@radpack/client": "^1.0.0"
+  },
+  "optionalDependencies": {
+    "@radpack/example-basic-lib": "^1.0.0",
+    "@radpack/example-logger-lib": "^1.0.0"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,57 @@
+header {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#content-wrapper {
+  padding-top:20px;
+}
+
+figure {
+  margin:1em 0;
+}
+
+blockquote {
+  margin-left:0;
+}
+
+nav h2:before {
+  position:relative;
+  top:3px;
+  content: '';
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  left:-5px;
+  background-image: url("https://github.githubassets.com/images/icons/emoji/unicode/1f4cb.png");
+  background-size: contain;
+}
+
+nav li {
+  position:relative;
+  font-size:17px;
+  line-height:25px;
+  list-style:lower-alpha;
+  left:15px;
+  white-space: nowrap;
+}
+
+footer {
+  background-color: #252323;
+  border-top: solid 2px #c0c0c0;
+}
+
+nav table {
+  border:none;
+}
+
+nav td {
+  text-align:left;
+  border:none;
+  padding:20px;
+  vertical-align:top;
+}
+
+code, pre {
+  margin-bottom: 15px;
+}

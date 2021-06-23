@@ -1,0 +1,24 @@
+{
+  "root": true,
+  "extends": "godaddy",
+  "parser": "babel-eslint",
+  "rules": {
+    "eqeqeq": [
+      "error",
+      "smart"
+    ],
+    "max-params": [
+      "warn",
+      5
+    ],
+    "no-console": "error",
+    "no-new-func": "off",
+    "no-process-env": "off",
+    "no-return-assign": "off",
+    "no-sync": "off"
+  },
+  "globals": {
+    "radpack": true,
+    "globalThis": false
+  }
+}

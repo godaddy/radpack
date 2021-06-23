@@ -1,0 +1,49 @@
+{
+  "name": "@radpack/client",
+  "version": "1.0.0",
+  "description": "Rapid Application Development Packaging Client Runtime",
+  "main": "./lib/index.cjs.js",
+  "module": "./lib/index.esm.js",
+  "browser": "./lib/browser.js",
+  "unpkg": "./lib/browser.js",
+  "exports": {
+    ".": {
+      "import": "./lib/index.esm.js",
+      "require": "./lib/index.cjs.js"
+    },
+    "./browser": "./lib/browser.js"
+  },
+  "files": [
+    "browser/",
+    "lib/"
+  ],
+  "scripts": {
+    "prebuild": "rimraf lib",
+    "build": "rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:godaddy/radpack.git",
+    "directory": "packages/client"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@radpack/core": "^1"
+  },
+  "peerDependenciesMeta": {
+    "@radpack/core": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@radpack/core": "^1.0.0",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.47.0",
+    "rollup-plugin-terser": "^7.0.2"
+  },
+  "license": "MIT"
+}

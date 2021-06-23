@@ -1,0 +1,27 @@
+{
+  "private": true,
+  "name": "@radpack/example-webpack-app",
+  "version": "1.0.0",
+  "description": "radpack example webpack application",
+  "main": "dist/main.js",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "webpack",
+    "start": "node ."
+  },
+  "dependencies": {
+    "@radpack/core": "^1.0.0",
+    "@radpack/server": "^1.0.0"
+  },
+  "devDependencies": {
+    "@radpack/webpack-plugin": "^1.0.0",
+    "rimraf": "^3.0.2",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^4.7.0"
+  },
+  "optionalDependencies": {
+    "@radpack/example-basic-lib": "^1.0.0",
+    "@radpack/example-logger-lib": "^1.0.0"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "name": "@radpack/example-webpack-client",
+  "version": "1.0.0",
+  "description": "radpack example webpack client",
+  "scripts": {
+    "prestart": "rimraf dist",
+    "start": "radpack local --statics ../../ --open \"${RADPACK_STATICS}/clients/webpack/\" --run \"webpack\""
+  },
+  "dependencies": {
+    "@radpack/cli": "^1.0.0",
+    "@radpack/client": "^1.0.0",
+    "@radpack/webpack-plugin": "^1.0.0",
+    "rimraf": "^3.0.2",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^4.7.0"
+  },
+  "optionalDependencies": {
+    "@radpack/example-basic-lib": "^1.0.0",
+    "@radpack/example-logger-lib": "^1.0.0"
+  },
+  "license": "MIT"
+}

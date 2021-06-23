@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "name": "@radpack/example-middleware-app",
+  "version": "1.0.0",
+  "description": "radpack example middleware application",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "dependencies": {
+    "@radpack/core": "^1.0.0",
+    "@radpack/example-basic-lib": "^1.0.0",
+    "@radpack/example-logger-lib": "^1.0.0",
+    "@radpack/server": "^1.0.0",
+    "express": "^4.17.1",
+    "opener": "^1.5.2"
+  },
+  "license": "MIT"
+}

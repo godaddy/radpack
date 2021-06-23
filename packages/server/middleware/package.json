@@ -1,0 +1,5 @@
+{
+  "private": true,
+  "main": "../lib/middleware.cjs.js",
+  "module": "../lib/middleware.esm.js"
+}

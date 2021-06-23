@@ -1,0 +1,5 @@
+{
+  "private": true,
+  "main": "../lib/loader.cjs.js",
+  "module": "../lib/loader.esm.js"
+}
