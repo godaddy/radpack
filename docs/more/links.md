@@ -11,4 +11,4 @@ redirect_from:
 
 # More Resources
 
-* [Examples](https://github.com/godaddy/radpack/tree/master/examples/)
+* [Examples](https://github.com/godaddy/radpack/tree/main/examples/)
