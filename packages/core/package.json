@@ -1,6 +1,6 @@
 {
   "name": "@radpack/core",
-  "version": "1.0.0",
+  "version": "1.0.0-rc",
   "description": "Rapid Application Development Packaging Core",
   "main": "./lib/index.js",
   "module": "./src/index.js",
