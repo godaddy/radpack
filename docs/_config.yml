@@ -46,9 +46,9 @@ logo: /static/radpack-logo.png
 # Aux links for the upper right navigation
 aux_links:
   "Docs on GitHub":
-    - "//github.com/godaddy/radpack/tree/master/docs"
+    - "//github.com/godaddy/radpack/tree/main/docs"
   "Examples":
-    - "//github.com/godaddy/radpack/tree/master/examples"
+    - "//github.com/godaddy/radpack/tree/main/examples"
 
 # Makes Aux links open in a new tab. Default is false
 aux_links_new_tab: true
@@ -100,7 +100,7 @@ last_edit_time_format: "%b %e %Y at %I:%M %p" # uses ruby's time format: https:/
 gh_edit_link: true # show or hide edit this page link
 gh_edit_link_text: "Edit this page on GitHub"
 gh_edit_repository: "https://github.com/godaddy/radpack" # the github URL for your repo
-gh_edit_branch: "master/docs" # the branch that your docs is served from
+gh_edit_branch: "main/docs" # the branch that your docs is served from
 # gh_edit_source: docs # the source that your files originate from
 gh_edit_view_mode: "tree" # "tree" or "edit" if you want the user to jump into the editor immediately
 
