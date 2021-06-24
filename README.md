@@ -1,4 +1,8 @@
 # radpack
+
+![example workflow](https://github.com/godaddy/radpack/actions/workflows/.github/workflows/cicd.yml/badge.svg)
+
+
 Rapid Application Development Packaging
 
 
