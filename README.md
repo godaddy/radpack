@@ -34,7 +34,7 @@ by taking advantage of build-time bundling, with graph-based run-time loading.
 
 ## Documentation
 
-Live Docs: https://github.com/pages/godaddy/radpack/
+Live Docs: https://godaddy.github.io/radpack
 
 [Authoring documentation](./docs.md)
 
