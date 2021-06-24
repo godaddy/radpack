@@ -23,9 +23,10 @@
     "prebuild": "rimraf lib",
     "build": "babel src -d lib"
   },
+  "homepage": "https://github.com/godaddy/radpack/tree/main/packages/core#readme",
   "repository": {
     "type": "git",
-    "url": "git@github.com:godaddy/radpack.git",
+    "url": "https://github.com/godaddy/radpack.git",
     "directory": "packages/core"
   },
   "publishConfig": {

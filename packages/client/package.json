@@ -21,9 +21,10 @@
     "prebuild": "rimraf lib",
     "build": "rollup -c"
   },
+  "homepage": "https://github.com/godaddy/radpack/tree/main/packages/client#readme",
   "repository": {
     "type": "git",
-    "url": "git@github.com:godaddy/radpack.git",
+    "url": "https://github.com/godaddy/radpack.git",
     "directory": "packages/client"
   },
   "publishConfig": {
