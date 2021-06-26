@@ -15,7 +15,8 @@
     }
   },
   "files": [
-    "lib/"
+    "lib/",
+    "middleware/"
   ],
   "scripts": {
     "prebuild": "rimraf lib",
