@@ -130,8 +130,8 @@ class RadpackPlugin {
           .tap(PLUGIN, this.importSpecifier.bind(this, parser));
 
         // Update dynamic import calls
-        parser.hooks.statement
-          .tap(PLUGIN, this.statement.bind(this, parser));
+        parser.hooks.importCall
+          .tap(PLUGIN, this.radpackCall.bind(this, parser));
 
         // Update radpack calls
         parser.hooks.call
@@ -147,6 +147,11 @@ class RadpackPlugin {
         parser.hooks.evaluateTypeof
           .for('radpack')
           .tap(PLUGIN, ParserHelpers.evaluateToIdentifier(RUNTIME_DYNAMIC, true));
+
+        // Update require calls
+        parser.hooks.call
+          .for('require')
+          .tap(PLUGIN, this.requireCall.bind(this, parser));
       };
 
       // Apply transforms to JS modules
@@ -309,38 +314,30 @@ class RadpackPlugin {
     }
   }
 
-  statement(parser, statement) {
-    if (statement.type === 'ExpressionStatement') {
-      let expression = statement.expression;
-      if (expression.callee) {
-        let type = expression.callee.type;
-        if (type === 'MemberExpression' && expression.callee.object.type === 'CallExpression') {
-          expression = expression.callee.object;
-          type = expression.callee.type;
-        }
-        if (type === 'Import') {
-          return this.radpackCall(parser, expression);
-        }
-      }
-    }
-  }
-
   radpackCall(parser, expression, force = false) {
+    let exp;
     const argument = expression.arguments[0];
     if (argument.type === 'Literal') {
       const value = argument.value;
-      let exp = this.getExport(value);
+      exp = this.getExport(value);
       if (!exp && force) {
         exp = value;
       }
-      if (exp) {
-        force = true;
-        argument.value = exp;
-        RadpackPlugin.getModuleBuildInfo(parser.state.current).dynamics.add(this.getRelative(exp));
-      }
     }
-    if (force) {
-      return ParserHelpers.toConstantDependencyWithWebpackRequire(parser, RUNTIME_DYNAMIC)(expression.callee);
+    if (exp) {
+      RadpackPlugin.getModuleBuildInfo(parser.state.current).dynamics.add(this.getRelative(exp));
+      return ParserHelpers.toConstantDependencyWithWebpackRequire(parser, `${ RUNTIME_DYNAMIC }(${ JSON.stringify(exp) })`)(expression);
+    }
+  }
+
+  requireCall(parser, expression) {
+    const argument = expression.arguments[0];
+    if (argument.type === 'Literal') {
+      const exp = this.getExport(argument.value);
+      if (exp) {
+        RadpackPlugin.getModuleBuildInfo(parser.state.current).statics.add(this.getRelative(exp));
+        return ParserHelpers.toConstantDependencyWithWebpackRequire(parser, `${ RUNTIME_STATIC }(${ JSON.stringify(exp) })`)(expression);
+      }
     }
   }
 
