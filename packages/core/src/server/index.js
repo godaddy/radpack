@@ -1,3 +1,4 @@
+export * as constants from './constants';
 export { default as fetch } from './fetch';
 export { default as fetchFile } from './fetch-file';
 export { default as fetchJson } from './fetch-json';

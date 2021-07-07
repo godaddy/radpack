@@ -1,12 +1,13 @@
 import path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 import Radpack, { flatten, noop } from '@radpack/core';
-import { fetch, parseUrl } from '@radpack/core/server';
-import { DEFAULT_DELAY, DEFAULT_EXPIRE, DEFAULT_RETRIES, DEFAULT_TTS } from './constants';
+import { fetch, parseUrl, constants } from '@radpack/core/server';
+import { DEFAULT_EXPIRE, DEFAULT_RETRIES, DEFAULT_TTS } from './constants';
 
 const CWD = process.cwd();
 const SERVER_PATH = '@radpack/server';
 const SERVER_ABS_PATH = require.resolve(SERVER_PATH);
+const { DEFAULT_DELAY, DEFAULT_TIMEOUT } = constants;
 
 export default class extends Radpack {
   constructor({ registers = [], ...options } = {}) {
@@ -69,6 +70,7 @@ export default class extends Radpack {
           ? DEFAULT_TTS
           : 0,
         delay: DEFAULT_DELAY,
+        timeout: DEFAULT_TIMEOUT,
         retries: DEFAULT_RETRIES,
         ...options,
         config,
@@ -152,7 +154,7 @@ export default class extends Radpack {
   }
 
   async _fetchJson(cache, options) {
-    const { delay, retries } = options;
+    const { delay, timeout, retries } = options;
     const { url, last, etag } = cache;
     const headers = {};
     if (last) {
@@ -161,7 +163,7 @@ export default class extends Radpack {
     if (etag) {
       headers['If-None-Match'] = etag;
     }
-    const res = await fetch(url, { headers, delay, retries });
+    const res = await fetch(url, { headers, delay, timeout, retries });
     const isCacheHit = cache.json && res.status === 304;
     if (!isCacheHit && !res.ok) {
       throw Error(await res.text());
