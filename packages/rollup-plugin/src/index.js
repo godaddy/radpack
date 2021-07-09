@@ -43,7 +43,7 @@ export default function RadpackPlugin(options) {
         return null;
       }
       const exp = getExportById(id);
-      if (exp) {
+      if (exp && exp !== options.name && !exp.startsWith(`${ options.name }/`)) {
         return { id: exp, external: true };
       }
     },
