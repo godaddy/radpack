@@ -2,7 +2,7 @@
 The server-side runtime package. This is automatically imported into applications built using [@radpack/webpack-plugin] and targeting [node](webpack-target). For client-side usage, use [@radpack/client].
 
 [Documentation](https://godaddy.github.io/radpack)
-![Logo](../../docs/_site/static/radpack-logo.svg)
+![Logo](../../docs/static/radpack-logo.svg)
 
 
 ## Installation
