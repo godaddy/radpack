@@ -3,7 +3,7 @@
 ![CICD Status](https://github.com/godaddy/radpack/actions/workflows/.github/workflows/cicd.yml/badge.svg)
 
 [Documentation](https://godaddy.github.io/radpack)
-![Logo](./docs/_site/static/radpack-logo.svg)
+![Logo](./docs/static/radpack-logo.svg)
 
 
 
