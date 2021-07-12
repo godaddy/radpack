@@ -1,6 +1,9 @@
 # @radpack/webpack-plugin
 A [webpack] plugin for building applications with radpack.
 
+[Documentation](https://godaddy.github.io/radpack)
+![Logo](../../docs/_site/static/radpack-logo.svg)
+
 
 ## Installation
 ```sh

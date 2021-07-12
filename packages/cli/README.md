@@ -1,6 +1,9 @@
 # @radpack/cli
 Various CLI helper utilities and services to use for more advanced radpack use cases.
 
+[Documentation](https://godaddy.github.io/radpack)
+![Logo](../../docs/_site/static/radpack-logo.svg)
+
 
 ## Installation
 ```sh

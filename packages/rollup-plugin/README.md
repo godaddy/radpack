@@ -1,6 +1,9 @@
 # @radpack/rollup-plugin
 A [rollup] plugin for building libraries with radpack.
 
+[Documentation](https://godaddy.github.io/radpack)
+![Logo](../../docs/_site/static/radpack-logo.svg)
+
 
 ## Installation
 ```sh
