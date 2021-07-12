@@ -2,7 +2,7 @@
 Common internal functionality of radpack and peer dependency of all radpack dependencies.
 
 [Documentation](https://godaddy.github.io/radpack)
-![Logo](../../docs/_site/static/radpack-logo.svg)
+![Logo](../../docs/static/radpack-logo.svg)
 
 
 ## Installation
