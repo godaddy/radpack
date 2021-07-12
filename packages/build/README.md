@@ -2,6 +2,7 @@
 Common internal functionality of radpack build tools for other packages like [@radpack/rollup-plugin] and [@radpack/webpack-plugin].
 
 [Documentation](https://godaddy.github.io/radpack)
+![Logo](../../docs/_site/static/radpack-logo.svg)
 
 
 ## Installation
