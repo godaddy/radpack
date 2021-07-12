@@ -41,7 +41,7 @@ plugins:
 # Enable or disable heading anchors
 heading_anchors: true
 
-logo: /static/radpack-logo.png
+logo: /static/radpack-logo.svg
 
 # Aux links for the upper right navigation
 aux_links:
@@ -73,10 +73,6 @@ aux_links_new_tab: true
 #   - vendor/gems/
 #   - vendor/ruby/
 
-
-
-
-
 # Sort order for navigation links
 # nav_sort: case_insensitive # default, equivalent to nil
 nav_sort: case_sensitive # Capital letters sorted before lowercase
@@ -93,8 +89,6 @@ footer_content: "Copyright &copy; 2021 GoDaddy."
 # Footer last edited timestamp
 last_edit_timestamp: true # show or hide edit time - page must have `last_modified_date` defined in the frontmatter
 last_edit_time_format: "%b %e %Y at %I:%M %p" # uses ruby's time format: https://ruby-doc.org/stdlib-2.7.0/libdoc/time/rdoc/Time.html
-
-
 
 # Footer "Edit this page on GitHub" link text
 gh_edit_link: true # show or hide edit this page link
