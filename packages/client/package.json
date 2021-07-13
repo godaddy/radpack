@@ -1,6 +1,6 @@
 {
   "name": "@radpack/client",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Rapid Application Development Packaging Client Runtime",
   "main": "./lib/index.cjs.js",
   "module": "./lib/index.esm.js",
@@ -39,7 +39,7 @@
     }
   },
   "devDependencies": {
-    "@radpack/core": "^1.0.2",
+    "@radpack/core": "^1.0.3",
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-node-resolve": "^13.0.0",
     "rimraf": "^3.0.2",
