@@ -94,8 +94,16 @@ class RadpackPlugin {
       };
     }
 
-    compiler.hooks.beforeRun.tapPromise(PLUGIN, async () => {
+    // Get exports when starting build
+    compiler.hooks.run.tapPromise(PLUGIN, async () => {
       this.exports = await getExports(this.options);
+    });
+
+    // Only get exports once when starting watch build
+    compiler.hooks.watchRun.tapPromise(PLUGIN, async () => {
+      if (!this.exports) {
+        this.exports = await getExports(this.options);
+      }
     });
 
     // Inject radpack and transform runtime and modules
