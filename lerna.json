@@ -7,6 +7,13 @@
     "examples/libs/*"
   ],
   "command": {
+    "publish": {
+      "private": false,
+      "ignoreChanges": [
+        "packages/**/*.md",
+        "packages/*/test/**/*"
+      ]
+    },
     "bootstrap": {
       "npmClientArgs": [
         "--no-package-lock"
