@@ -6,12 +6,12 @@ test.beforeEach(t => {
   const { id, Server, createClass } = t.context;
   const url = 'http://test/' + id;
   t.context.urls = [url];
-  t.context.options = { tts: 1 };
+  t.context.options = { tts: 1, urls: new Set(t.context.urls), done: () => {} };
   t.context.cache = { url, jsonString: JSON.stringify({}) };
   t.context._loadJson = () => {};
   t.context.instance = new (createClass(Server, {
     _getCache: () => t.context.cache,
-    _loadJson: (url) => t.context._loadJson(url),
+    _loadJson: (url, opts) => t.context._loadJson(url, opts),
     _setRegister: () => {},
     _fetchRegister: () => {}
   }))();
@@ -25,16 +25,16 @@ test.beforeEach(t => {
 });
 
 test('fetches url', async t => {
-  const { sut, instance } = t.context;
+  const { sut, instance, wait } = t.context;
   t.is(instance._loadJson.calls.length, 0);
   sut();
-  await new Promise(resolve => setTimeout(resolve, 1));
+  await wait(1);
   t.is(instance._loadJson.calls.length, 1);
   t.is(instance._fetchRegister.calls.length, 0);
 });
 
 test('fetches register on change', async t => {
-  const { sut, cache, instance } = t.context;
+  const { sut, cache, instance, wait } = t.context;
   t.is(instance._loadJson.calls.length, 0);
   t.is(instance._setRegister.calls.length, 0);
   t.is(instance._fetchRegister.calls.length, 0);
@@ -42,8 +42,30 @@ test('fetches register on change', async t => {
     cache.jsonString = JSON.stringify({ new: true });
   };
   sut();
-  await new Promise(resolve => setTimeout(resolve, 1));
+  await wait(1);
   t.is(instance._loadJson.calls.length, 1);
   t.is(instance._setRegister.calls.length, 1);
   t.is(instance._fetchRegister.calls.length, 1);
+});
+
+test('calls done on change', async t => {
+  const { sut, cache, options, stub, wait } = t.context;
+  const done = options.done = stub();
+  t.is(done.calls.length, 0);
+  t.context._loadJson = (url, opts) => {
+    opts.urls.add(url);
+    cache.jsonString = JSON.stringify({ new: true });
+  };
+  sut();
+  await wait(1);
+  t.is(done.calls.length, 1);
+  t.deepEqual(done.calls[0].arguments[0], [...options.urls]);
+});
+
+test('does not call done if no changes', async t => {
+  const { sut, options, stub, wait } = t.context;
+  const done = options.done = stub();
+  sut();
+  await wait(1);
+  t.is(done.calls.length, 0);
 });

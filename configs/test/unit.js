@@ -11,6 +11,7 @@ export default (defaultState) => {
 
   test.before(t => {
     Object.assign(t.context, {
+      wait: ms => new Promise(resolve => setTimeout(resolve, ms)),
       fetch: globalThis.fetch = fetch()
     });
   });
