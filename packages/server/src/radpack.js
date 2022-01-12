@@ -72,6 +72,7 @@ export default class extends Radpack {
         delay: DEFAULT_DELAY,
         timeout: DEFAULT_TIMEOUT,
         retries: DEFAULT_RETRIES,
+        done: noop,
         ...options,
         config,
         urls: new Set()
@@ -184,6 +185,7 @@ export default class extends Radpack {
     const index = this._registers.length;
     const { exports: exps } = this._setRegister(index, registers);
     exps.forEach(this._setExports, this);
+    options.done({ urls }, this);
     if (options.tts > 0 && urls.length) {
       this._watch(index, urls, options);
     }
@@ -225,6 +227,7 @@ export default class extends Radpack {
           nextUrls = [...options.urls];
           this._setRegister(index, registers);
           this._resetExports();
+          options.done({ urls: nextUrls }, this);
         }
       }).catch(() => {
         // Revert to prior urls

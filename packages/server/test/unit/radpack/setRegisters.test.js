@@ -10,7 +10,7 @@ test.beforeEach(t => {
     _setRegister: (index, registers) => ({ registers, exports: registers })
   }))();
   t.context.registers = [];
-  t.context.options = { tts: 0, urls: new Set() };
+  t.context.options = { tts: 0, urls: new Set(), done: () => {} };
   t.context.sut = (registers = t.context.registers, options = t.context.options) => t.context.instance._setRegisters(registers, options);
 });
 
@@ -19,6 +19,19 @@ test('sets exports for each register', t => {
   const registers = new Array(Math.floor(Math.random() * 10)).fill({});
   sut(registers);
   t.is(instance._setExports.calls.length, registers.length);
+});
+
+test('calls done', t => {
+  const { sut, instance, options, stub } = t.context;
+  const done = stub();
+  const urls = new Set(['a']);
+  t.is(done.calls.length, 0);
+  options.done = done;
+  options.urls = urls;
+  sut([{}]);
+  t.is(done.calls.length, 1);
+  t.deepEqual(done.calls[0].arguments[0], { urls: [...urls] });
+  t.is(done.calls[0].arguments[1], instance);
 });
 
 test('calls watch', t => {
