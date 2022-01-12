@@ -49,7 +49,7 @@ test('fetches register on change', async t => {
 });
 
 test('calls done on change', async t => {
-  const { sut, cache, options, stub, wait } = t.context;
+  const { sut, instance, cache, options, stub, wait } = t.context;
   const done = options.done = stub();
   t.is(done.calls.length, 0);
   t.context._loadJson = (url, opts) => {
@@ -59,7 +59,8 @@ test('calls done on change', async t => {
   sut();
   await wait(1);
   t.is(done.calls.length, 1);
-  t.deepEqual(done.calls[0].arguments[0], [...options.urls]);
+  t.deepEqual(done.calls[0].arguments[0], { urls: [...options.urls] });
+  t.is(done.calls[0].arguments[1], instance);
 });
 
 test('does not call done if no changes', async t => {

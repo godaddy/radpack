@@ -22,7 +22,7 @@ test('sets exports for each register', t => {
 });
 
 test('calls done', t => {
-  const { sut, options, stub } = t.context;
+  const { sut, instance, options, stub } = t.context;
   const done = stub();
   const urls = new Set(['a']);
   t.is(done.calls.length, 0);
@@ -30,7 +30,8 @@ test('calls done', t => {
   options.urls = urls;
   sut([{}]);
   t.is(done.calls.length, 1);
-  t.deepEqual(done.calls[0].arguments[0], [...urls]);
+  t.deepEqual(done.calls[0].arguments[0], { urls: [...urls] });
+  t.is(done.calls[0].arguments[1], instance);
 });
 
 test('calls watch', t => {
