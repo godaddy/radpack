@@ -61,7 +61,7 @@ export default class Middleware {
     // Create proxy after handlers are assigned
     this.proxy = proxy || serveStatic(this.root, {
       cacheControl: false,
-      setHeaders: this.handleSetHeaders,
+      setHeaders: this.handleSetHeaders.bind(this),
       ...proxyOptions
     });
     this.load();
@@ -214,11 +214,7 @@ export default class Middleware {
 
   // Can override with options.onSetHeaders
   handleSetHeaders(res) {
-    if (res.set) {
-      // express
-      res.set(this.headers);
-    } else {
-      // http/connect
+    if (this.headers) {
       Object.entries(this.headers).forEach(([key, value]) => {
         res.setHeader(key, value);
       });
