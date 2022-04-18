@@ -8,8 +8,8 @@
     "start": "node ."
   },
   "dependencies": {
-    "@radpack/core": "^1.0.0",
-    "@radpack/server": "^1.0.0"
+    "@radpack/core": "^1.0.3",
+    "@radpack/server": "^1.1.1"
   },
   "optionalDependencies": {
     "@radpack/example-context-lib": "^1.0.0",

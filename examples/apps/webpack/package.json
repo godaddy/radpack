@@ -10,14 +10,14 @@
     "start": "node ."
   },
   "dependencies": {
-    "@radpack/core": "^1.0.0",
-    "@radpack/server": "^1.0.0"
+    "@radpack/core": "^1.0.3",
+    "@radpack/server": "^1.1.1"
   },
   "devDependencies": {
-    "@radpack/webpack-plugin": "^1.0.0",
+    "@radpack/webpack-plugin": "^1.0.5",
     "rimraf": "^3.0.2",
     "webpack": "^4.46.0",
-    "webpack-cli": "^4.7.0"
+    "webpack-cli": "^4.9.2"
   },
   "optionalDependencies": {
     "@radpack/example-basic-lib": "^1.0.0",

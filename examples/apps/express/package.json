@@ -8,9 +8,9 @@
     "start": "node ."
   },
   "dependencies": {
-    "@radpack/core": "^1.0.0",
-    "@radpack/server": "^1.0.0",
-    "express": "^4.17.1",
+    "@radpack/core": "^1.0.3",
+    "@radpack/server": "^1.1.1",
+    "express": "^4.17.3",
     "opener": "^1.5.2"
   },
   "optionalDependencies": {

@@ -10,12 +10,12 @@
     "watch": "nodemon --exec \"npm run build\""
   },
   "devDependencies": {
-    "@radpack/core": "^1.0.0",
-    "@radpack/rollup-plugin": "^1.0.0",
+    "@radpack/core": "^1.0.3",
+    "@radpack/rollup-plugin": "^1.0.3",
     "dirsum": "^0.1.1",
-    "nodemon": "^2.0.7",
+    "nodemon": "^2.0.15",
     "rimraf": "^3.0.2",
-    "rollup": "^2.47.0"
+    "rollup": "^2.70.2"
   },
   "optionalDependencies": {
     "@radpack/example-logger-lib": "^1.0.0"
