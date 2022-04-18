@@ -1,6 +1,6 @@
 {
   "name": "@radpack/cli",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Rapid Application Development Packaging CLI",
   "bin": {
     "radpack": "./lib/index.js"
@@ -39,8 +39,8 @@
     "yargs": "^17.4.1"
   },
   "devDependencies": {
-    "@radpack/core": "^1.0.3",
-    "@radpack/server": "^1.1.1",
+    "@radpack/core": "^1.0.4",
+    "@radpack/server": "^1.1.2",
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^19.0.2",
     "@rollup/plugin-node-resolve": "^13.2.1",
