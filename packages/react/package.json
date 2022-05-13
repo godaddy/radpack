@@ -1,0 +1,43 @@
+{
+  "name": "@radpack/react",
+  "version": "1.0.0",
+  "description": "Rapid Application Development Packaging Client React Tools",
+  "main": "./lib/index.cjs.js",
+  "module": "./lib/index.esm.js",
+  "exports": {
+    ".": {
+      "import": "./lib/index.esm.js",
+      "require": "./lib/index.cjs.js"
+    },
+    "./browser": "./lib/browser.js"
+  },
+  "files": [
+    "browser/",
+    "lib/"
+  ],
+  "scripts": {
+    "prebuild": "rimraf lib",
+    "build": "rollup -c"
+  },
+  "homepage": "https://github.com/godaddy/radpack/tree/main/packages/react#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/godaddy/radpack.git",
+    "directory": "packages/react"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "devDependencies": {
+    "@rollup/plugin-babel": "^5.3.1",
+    "@rollup/plugin-node-resolve": "^13.2.1",
+    "react": "^17.0.2",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.70.2",
+    "rollup-plugin-terser": "^7.0.2"
+  },
+  "license": "MIT"
+}

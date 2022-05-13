@@ -1,0 +1,5 @@
+{
+  "private": true,
+  "main": "../lib/withRadpack.cjs.js",
+  "module": "../lib/withRadpack.esm.js"
+}

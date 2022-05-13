@@ -2,7 +2,7 @@ const start = Date.now();
 const isWeb = typeof document !== 'undefined';
 const isIntegration = !isWeb && typeof process !== 'undefined' && process.env.NODE_ENV === 'integration';
 
-export default (id, exports) => {
+export default (id, exports, addHtml = isWeb) => {
   const took = Date.now() - (globalThis.start || start);
   const html = [
     `<p>${ id } (${ took }ms):</p>`,
@@ -13,7 +13,7 @@ export default (id, exports) => {
   } else {
     console.log(`%s (%dms): %o`, id, took, exports);
   }
-  if (isWeb) {
+  if (addHtml) {
     document.body.innerHTML += html;
   } else {
     return html;

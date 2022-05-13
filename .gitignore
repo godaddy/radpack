@@ -3,6 +3,7 @@
 .DS_Store
 
 # Build
+.next
 .nyc_output
 coverage
 lib

@@ -10,8 +10,8 @@ import * as chunk from './chunk';
 // because only this entry uses this, the module is bundled into the entry
 import * as module from './module';
 
-export default () => [
-  log('basic.entry', entry),
-  log('basic.chunk', chunk),
-  log('basic.module', module)
+export default (addHtml) => [
+  log('basic.entry', entry, addHtml),
+  log('basic.chunk', chunk, addHtml),
+  log('basic.module', module, addHtml)
 ].join('\n');

@@ -1,0 +1,35 @@
+{
+  "private": true,
+  "name": "@radpack/example-gasket-app",
+  "version": "1.0.0",
+  "description": "radpack example gasket application",
+  "scripts": {
+    "build": "gasket build",
+    "start": "gasket start",
+    "local": "gasket local"
+  },
+  "dependencies": {
+    "@gasket/cli": "^6.20.3",
+    "@gasket/nextjs": "^6.20.3",
+    "@gasket/preset-nextjs": "^6.20.3",
+    "@radpack/core": "^1.0.4",
+    "@radpack/gasket-plugin": "^1.0.0",
+    "@radpack/server": "^1.1.2",
+    "express": "^4.17.3",
+    "lodash.merge": "^4.6.2",
+    "next": "^12.0.8",
+    "next-redux-wrapper": "^7.0.5",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.1.0",
+    "redux": "^4.0.5"
+  },
+  "devDependencies": {
+    "@radpack/client": "^1.0.4",
+    "@radpack/react": "^1.0.0",
+    "eslint-config-next": "^12.1.6",
+    "webpack": "^5.21.2"
+  },
+  "license": "MIT"
+}

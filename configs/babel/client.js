@@ -7,5 +7,5 @@ module.exports = {
       ...targets.node,
       ...targets.browser
     }
-  }]]
+  }], '@babel/preset-react']
 };

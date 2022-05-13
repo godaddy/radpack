@@ -1,0 +1,10 @@
+{
+  "env": {
+    "browser": {
+      "extends": "../../configs/babel/browser.js"
+    },
+    "client": {
+      "extends": "../../configs/babel/client.js"
+    }
+  }
+}

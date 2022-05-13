@@ -4,5 +4,5 @@ module.exports = {
   presets: [['@babel/preset-env', {
     bugfixes: true,
     targets: targets.browser
-  }]]
+  }], '@babel/preset-react']
 };

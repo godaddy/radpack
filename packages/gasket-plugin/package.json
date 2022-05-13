@@ -1,0 +1,69 @@
+{
+  "name": "@radpack/gasket-plugin",
+  "version": "1.0.0",
+  "description": "Rapid Application Development Packaging Gasket Plugin",
+  "main": "./lib/index.cjs.js",
+  "module": "./lib/index.esm.js",
+  "exports": {
+    ".": {
+      "import": "./lib/index.esm.js",
+      "require": "./lib/index.cjs.js"
+    },
+    "./withRadpack": {
+      "import": "./lib/withRadpack.esm.js",
+      "require": "./lib/withRadpack.cjs.js"
+    }
+  },
+  "files": [
+    "lib/",
+    "withRadpack/"
+  ],
+  "scripts": {
+    "prebuild": "rimraf lib",
+    "build": "rollup -c"
+  },
+  "homepage": "https://github.com/godaddy/radpack/tree/main/packages/gasket-plugin#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/godaddy/radpack.git",
+    "directory": "packages/gasket-plugin"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@gasket/data": "*",
+    "@radpack/client": "^1",
+    "@radpack/react": "^1",
+    "@radpack/server": "^1",
+    "react": "*"
+  },
+  "peerDependenciesMeta": {
+    "@gasket/data": {
+      "optional": true
+    },
+    "@radpack/react": {
+      "optional": true
+    },
+    "@radpack/client": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "hoist-non-react-statics": "^3.3.2"
+  },
+  "devDependencies": {
+    "@gasket/data": "^6.20.2",
+    "@radpack/client": "^1.0.4",
+    "@radpack/react": "^1.0.0",
+    "@radpack/server": "^1.1.2",
+    "@rollup/plugin-babel": "^5.3.1",
+    "@rollup/plugin-node-resolve": "^13.2.1",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.70.2"
+  },
+  "license": "MIT"
+}
