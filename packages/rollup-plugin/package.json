@@ -33,7 +33,7 @@
   "dependencies": {
     "@radpack/build": "^1.0.4",
     "acorn-walk": "^8.2.0",
-    "magic-string": "^0.25.9"
+    "magic-string": "^0.26.2"
   },
   "devDependencies": {
     "@radpack/core": "^1.0.4",
