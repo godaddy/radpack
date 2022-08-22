@@ -35,15 +35,15 @@
     "@radpack/core": "^1"
   },
   "dependencies": {
-    "glob": "^7.2.0",
+    "glob": "^7.2.3",
     "serve-static": "^1.15.0"
   },
   "devDependencies": {
     "@radpack/core": "^1.0.4",
     "@rollup/plugin-babel": "^5.3.1",
-    "@rollup/plugin-node-resolve": "^13.2.1",
+    "@rollup/plugin-node-resolve": "^13.3.0",
     "rimraf": "^3.0.2",
-    "rollup": "^2.70.2"
+    "rollup": "^2.78.1"
   },
   "license": "MIT"
 }
