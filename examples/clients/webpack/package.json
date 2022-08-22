@@ -8,9 +8,9 @@
     "start": "radpack local --statics ../../ --open \"${RADPACK_STATICS}/clients/webpack/\" --run \"webpack\""
   },
   "dependencies": {
-    "@radpack/cli": "^1.0.6",
-    "@radpack/client": "^1.0.4",
-    "@radpack/webpack-plugin": "^1.0.6",
+    "@radpack/cli": "^1.0.7",
+    "@radpack/client": "^1.0.5",
+    "@radpack/webpack-plugin": "^1.0.7",
     "rimraf": "^3.0.2",
     "webpack": "^4.46.0",
     "webpack-cli": "^4.10.0"
