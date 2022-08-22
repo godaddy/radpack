@@ -33,10 +33,10 @@
   "dependencies": {
     "connect": "^3.7.0",
     "cross-spawn": "^7.0.3",
-    "glob": "^7.2.0",
+    "glob": "^7.2.3",
     "opener": "^1.5.2",
     "serve-static": "^1.15.0",
-    "yargs": "^17.4.1"
+    "yargs": "^17.5.1"
   },
   "devDependencies": {
     "@radpack/core": "^1.0.4",

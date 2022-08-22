@@ -13,6 +13,9 @@
     "unit": "ava -v \"./@(examples|packages)/**/test/unit/**/*.test.js\"",
     "integration": "ava -v \"./@(examples|packages)/**/test/integration/**/*.test.js\"",
     "coverage": "nyc --reporter=html --reporter=text npm run unit",
+    "clean": "node ./scripts/clean.js",
+    "update": "node ./scripts/update.js",
+    "reset": "npm run clean && npm ci && npm run update",
     "postinstall": "npm run bootstrap",
     "prepublishOnly": "npm run build && npm run test"
   },
@@ -31,6 +34,8 @@
     "cross-spawn": "^7.0.3",
     "eslint": "^7.32.0",
     "eslint-config-godaddy": "^5.0.1",
+    "find-up": "^4.1.0",
+    "glob": "^7.2.3",
     "lerna": "^4.0.0",
     "ninos": "^3.0.0",
     "nyc": "^15.1.0",

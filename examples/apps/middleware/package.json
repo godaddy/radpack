@@ -8,11 +8,11 @@
     "start": "node ."
   },
   "dependencies": {
-    "@radpack/core": "^1.0.3",
+    "@radpack/core": "^1.0.4",
     "@radpack/example-basic-lib": "^1.0.0",
     "@radpack/example-logger-lib": "^1.0.0",
-    "@radpack/server": "^1.1.1",
-    "express": "^4.17.3",
+    "@radpack/server": "^1.1.2",
+    "express": "^4.18.1",
     "opener": "^1.5.2"
   },
   "license": "MIT"
