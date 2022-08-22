@@ -1,6 +1,6 @@
 {
   "name": "@radpack/rollup-plugin",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Rapid Application Development Packaging Rollup Plugin",
   "main": "./lib/index.cjs.js",
   "module": "./lib/index.esm.js",
@@ -31,12 +31,12 @@
     "rollup": "^2"
   },
   "dependencies": {
-    "@radpack/build": "^1.0.4",
+    "@radpack/build": "^1.0.5",
     "acorn-walk": "^8.2.0",
     "magic-string": "^0.25.9"
   },
   "devDependencies": {
-    "@radpack/core": "^1.0.4",
+    "@radpack/core": "^1.0.5",
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-node-resolve": "^13.3.0",
