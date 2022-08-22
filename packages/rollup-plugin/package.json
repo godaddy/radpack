@@ -38,11 +38,11 @@
   "devDependencies": {
     "@radpack/core": "^1.0.4",
     "@rollup/plugin-babel": "^5.3.1",
-    "@rollup/plugin-commonjs": "^19.0.2",
-    "@rollup/plugin-node-resolve": "^13.2.1",
-    "acorn": "^8.7.0",
+    "@rollup/plugin-commonjs": "^22.0.2",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "acorn": "^8.8.0",
     "rimraf": "^3.0.2",
-    "rollup": "^2.70.2"
+    "rollup": "^2.78.1"
   },
   "license": "MIT"
 }

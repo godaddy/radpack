@@ -14,9 +14,9 @@
     "@radpack/server": "^1.1.2"
   },
   "devDependencies": {
-    "@radpack/rollup-plugin": "^1.0.3",
+    "@radpack/rollup-plugin": "^1.0.4",
     "rimraf": "^3.0.2",
-    "rollup": "^2.70.2"
+    "rollup": "^2.78.1"
   },
   "optionalDependencies": {
     "@radpack/example-basic-lib": "^1.0.0",

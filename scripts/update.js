@@ -5,6 +5,7 @@ const findUp = require('find-up');
 const glob = promisify(require('glob'));
 
 const cwd = path.resolve(__dirname, '../');
+const cwdPkgPath = path.join(cwd, 'package.json');
 
 const cachedSemvers = {};
 
@@ -34,10 +35,11 @@ async function fix(cwd, deps = {}) {
 }
 
 async function update() {
-  const rootPkg = await fs.readFile(path.join(cwd, 'package.json'), 'utf8');
-  const lineEnding = rootPkg.substr(rootPkg.lastIndexOf('}') + 1);
+  const cwdPkg = await fs.readFile(cwdPkgPath, 'utf8');
+  const lineEnding = cwdPkg.substr(cwdPkg.lastIndexOf('}') + 1);
 
   const files = await Promise.all([
+    cwdPkgPath,
     glob('packages/*/package.json', { cwd, absolute: true }),
     glob('packages/*/*/package.json', { cwd, absolute: true }),
     glob('examples/*/*/package.json', { cwd, absolute: true })
@@ -48,7 +50,7 @@ async function update() {
     const pwd = path.dirname(file);
     const [dependencies, devDependencies] = await Promise.all([
       fix(pwd, pkg.dependencies),
-      fix(pkg.devDependencies)
+      fix(pwd, pkg.devDependencies)
     ]);
     if (!dependencies && !devDependencies) {
       return false;
