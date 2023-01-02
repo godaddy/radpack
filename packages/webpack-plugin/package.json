@@ -61,7 +61,7 @@
     "@rollup/plugin-node-resolve": "^13.3.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.78.1",
-    "webpack": "^4.46.0"
+    "webpack": "^5.75.0"
   },
   "license": "MIT"
 }
