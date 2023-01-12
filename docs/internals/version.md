@@ -39,7 +39,7 @@ something@1.1.0 deployed, @1.0.1 is dropped
 ```
 
 In some cases this is too strict, and you may opt to also retain minor versions (
-enabled by supplying `keepMinor: true` to the rollup plugin). This is discouraged,
+enabled by supplying `keepMinors: true` to the rollup plugin). This is discouraged,
 but may be neccessary in some cases.
 
 ```sh
