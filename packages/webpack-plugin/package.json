@@ -36,7 +36,7 @@
     "@radpack/client": "^1",
     "@radpack/core": "^1",
     "@radpack/server": "^1",
-    "webpack": "^4"
+    "webpack": ">=4"
   },
   "peerDependenciesMeta": {
     "@radpack/cli": {
@@ -61,7 +61,7 @@
     "@rollup/plugin-node-resolve": "^13.3.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.78.1",
-    "webpack": "^4.46.0"
+    "webpack": "^5.88.2"
   },
   "license": "MIT"
 }

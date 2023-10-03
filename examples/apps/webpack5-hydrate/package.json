@@ -1,8 +1,8 @@
 {
   "private": true,
-  "name": "@radpack/example-webpack-hydrate-app",
+  "name": "@radpack/example-webpack5-hydrate-app",
   "version": "1.0.0",
-  "description": "radpack example webpack 4 hydrate application",
+  "description": "radpack example webpack 5 hydrate application",
   "main": "dist/server/main.js",
   "scripts": {
     "prebuild": "rimraf dist",
@@ -19,8 +19,8 @@
     "@radpack/client": "^1.0.5",
     "@radpack/webpack-plugin": "^1.0.7",
     "rimraf": "^3.0.2",
-    "webpack": "^4.46.0",
-    "webpack-cli": "^4.10.0"
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
   },
   "optionalDependencies": {
     "@radpack/example-basic-lib": "^1.0.0",

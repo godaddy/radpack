@@ -4,9 +4,16 @@ import { pathToFileURL } from 'url';
 import { execSync } from 'child_process';
 import { Template } from 'webpack';
 import { RawSource } from 'webpack-sources';
-import ParserHelpers from 'webpack/lib/ParserHelpers';
 import { createEntry, createExport, toArray } from '@radpack/core';
-import { constants, createManifest, getExport, getExports, getRelativeExport, mergeExports, parseOptions } from '@radpack/build';
+import {
+  constants,
+  createManifest,
+  getExport,
+  getExports,
+  getRelativeExport,
+  mergeExports,
+  parseOptions
+} from '@radpack/build';
 import {
   HYDRATE,
   JS_TYPES,
@@ -28,17 +35,6 @@ class RadpackPlugin {
     return Template.toIdentifier(exp + '.' + RUNTIME_STATIC);
   }
 
-  static getModuleBuildInfo(module) {
-    const buildInfo = module.buildInfo;
-    if (!buildInfo.radpack) {
-      buildInfo.radpack = {
-        statics: new Set(),
-        dynamics: new Set()
-      };
-    }
-    return buildInfo.radpack;
-  }
-
   static getChunkName(chunk) {
     return chunk.name || `${ CHUNK_PATH }/${ chunk.id }`;
   }
@@ -52,6 +48,28 @@ class RadpackPlugin {
     };
   }
 
+  getModuleBuildInfo(module) {
+    if (this.v4) {
+      const buildInfo = module.buildInfo;
+      if (!buildInfo.radpack) {
+        buildInfo.radpack = {
+          statics: new Set(),
+          dynamics: new Set()
+        };
+      }
+      return buildInfo.radpack;
+    }
+    let moduleCache = this.modules.get(module.resource);
+    if (!moduleCache) {
+      moduleCache = {
+        statics: new Set(),
+        dynamics: new Set()
+      };
+      this.modules.set(module.resource, moduleCache);
+    }
+    return moduleCache;
+  }
+
   getExport(source) {
     return getExport(this.exports, source, this.options);
   }
@@ -63,7 +81,54 @@ class RadpackPlugin {
   apply(compiler) {
     // Set compiler options
     const errors = [];
-    const options = compiler.options;
+    let options = compiler.options;
+    const version = compiler.webpack
+      ? compiler.webpack.version.charAt(0)
+      : '4';
+    this.v4 = version === '4';
+    this.v5 = version === '5';
+    if (this.v4) {
+      let helpersPath;
+      const helpersName = 'webpack/lib/ParserHelpers';
+      try {
+        helpersPath = require.resolve(helpersName);
+      } catch {
+        helpersPath = require.resolve(path.join(process.cwd(), 'node_modules', helpersName));
+      }
+      const helpers = require(helpersPath);
+      this.evaluateToIdentifier = helpers.evaluateToIdentifier;
+      this.toConstantDependency = helpers.toConstantDependencyWithWebpackRequire;
+    } else {
+      options = {
+        ...options,
+        target: options.target || 'web',
+        output: {
+          ...options.output,
+          path: options.output
+            ? options.output.path || path.join(process.cwd(), 'dist')
+            : path.join(process.cwd(), 'dist')
+        },
+        optimization: {
+          ...options.optimization,
+          runtimeChunk: options.optimization
+            ? options.optimization.runtimeChunk || false
+            : false
+        }
+      };
+      let helpersPath;
+      const helpersName = 'webpack/lib/javascript/JavascriptParserHelpers';
+      try {
+        helpersPath = require.resolve(helpersName);
+      } catch {
+        helpersPath = require.resolve(path.join(process.cwd(), 'node_modules', helpersName));
+      }
+      const helpers = require(helpersPath);
+      this.evaluateToIdentifier = helpers.evaluateToIdentifier;
+      this.toConstantDependency = helpers.toConstantDependency;
+      if (!this.v5) {
+        errors.push(`${ PLUGIN }: Unsupported major webpack version: '${ version }'`);
+      }
+    }
     this.target = options.target;
     if (!SUPPORTED_TARGETS.includes(this.target)) {
       // TODO: Test other targets
@@ -96,11 +161,13 @@ class RadpackPlugin {
 
     // Get exports when starting build
     compiler.hooks.run.tapPromise(PLUGIN, async () => {
+      this.modules = new Map();
       this.exports = await getExports(this.options);
     });
 
     // Only get exports once when starting watch build
     compiler.hooks.watchRun.tapPromise(PLUGIN, async () => {
+      this.modules = new Map();
       if (!this.exports) {
         this.exports = await getExports(this.options);
       }
@@ -121,11 +188,11 @@ class RadpackPlugin {
 
       // Inject radpack into runtime
       compilation.mainTemplate.hooks.requireExtensions
-        .tap(PLUGIN, this.requireExtensions.bind(this));
+        .tap(PLUGIN, this.requireExtensions.bind(this, compilation));
 
       // Force dynamic chunks to load statics
       compilation.mainTemplate.hooks.requireEnsure
-        .tap(PLUGIN, this.requireEnsure.bind(this));
+        .tap(PLUGIN, this.requireEnsure.bind(this, compilation));
 
       // Transform modules to use radpack
       const handler = parser => {
@@ -149,12 +216,12 @@ class RadpackPlugin {
         // Update radpack references
         parser.hooks.expression
           .for('radpack')
-          .tap(PLUGIN, ParserHelpers.toConstantDependencyWithWebpackRequire(parser, RUNTIME_DYNAMIC));
+          .tap(PLUGIN, this.toConstantDependency(parser, RUNTIME_DYNAMIC));
 
         // Update typeof radpack calls
         parser.hooks.evaluateTypeof
           .for('radpack')
-          .tap(PLUGIN, ParserHelpers.evaluateToIdentifier(RUNTIME_DYNAMIC, true));
+          .tap(PLUGIN, this.evaluateToIdentifier(RUNTIME_DYNAMIC, true));
 
         // Update require calls
         parser.hooks.call
@@ -168,10 +235,19 @@ class RadpackPlugin {
           .for(type)
           .tap(PLUGIN, handler);
       });
+
+      // Inject manifest
+      if (!this.v4) {
+        compilation.hooks.processAssets.tap(PLUGIN, () => {
+          this.afterCompile(compilation);
+        });
+      }
     });
 
     // Inject manifest
-    compiler.hooks.afterCompile.tap(PLUGIN, this.afterCompile.bind(this));
+    if (this.v4) {
+      compiler.hooks.afterCompile.tap(PLUGIN, this.afterCompile.bind(this));
+    }
   }
 
   addEntry(entry) {
@@ -210,11 +286,20 @@ class RadpackPlugin {
     dependency.request = `@radpack/webpack-plugin/loader${ this.localProxyDeps || '' }!${ dependency.request }`;
   }
 
-  requireExtensions(source, chunk) {
+  requireExtensions(compilation, source, chunk) {
     const { localProxyRegister, options } = this;
     // Only add logic around JS entries
-    if (chunk.entryModule && !chunk.entryModule.identifier().match(options.test)) {
-      return source;
+    if (this.v4) {
+      if (chunk.entryModule && !chunk.entryModule.identifier().match(options.test)) {
+        return source;
+      }
+    } else {
+      const chunkGraph = compilation.chunkGraph;
+      for (const entryModule of chunkGraph.getChunkEntryModulesIterable(chunk)) {
+        if (!entryModule.resource.match(options.test)) {
+          return source;
+        }
+      }
     }
 
     // TODO: Handle static register
@@ -278,10 +363,19 @@ class RadpackPlugin {
     ]);
   }
 
-  requireEnsure(source, chunk) {
+  requireEnsure(compilation, source, chunk) {
     // Only add logic around JS entries
-    if (chunk.entryModule && !chunk.entryModule.identifier().match(this.options.test)) {
-      return source;
+    if (this.v4) {
+      if (chunk.entryModule && !chunk.entryModule.identifier().match(this.options.test)) {
+        return source;
+      }
+    } else {
+      const chunkGraph = compilation.chunkGraph;
+      for (const entryModule of chunkGraph.getChunkEntryModulesIterable(chunk)) {
+        if (!entryModule.resource.match(this.options.test)) {
+          return source;
+        }
+      }
     }
     return Template.asString([
       source,
@@ -299,13 +393,17 @@ class RadpackPlugin {
     if (exp) {
       const module = parser.state.current;
       const identifier = RadpackPlugin.getExportIdentifier(exp);
-      module.addVariable(
-        identifier,
-        `${ RUNTIME_STATIC }(${ JSON.stringify(exp) })`,
-        []
-      );
-      RadpackPlugin.getModuleBuildInfo(module).statics.add(this.getRelative(exp));
-      return ParserHelpers.toConstantDependencyWithWebpackRequire(parser, '')(expression);
+      this.getModuleBuildInfo(module).statics.add(this.getRelative(exp));
+      if (this.v4) {
+        module.addVariable(
+          identifier,
+          `${ RUNTIME_STATIC }(${ JSON.stringify(exp) })`,
+          []
+        );
+        return this.toConstantDependency(parser, '')(expression);
+      }
+      const variable = `var ${ identifier } = ${ RUNTIME_STATIC }(${ JSON.stringify(exp) });\n`;
+      return this.toConstantDependency(parser, variable)(expression);
     }
   }
 
@@ -318,23 +416,25 @@ class RadpackPlugin {
         value += `.${ exportName }`;
       }
       value += ';\n';
-      return ParserHelpers.toConstantDependency(parser, value)(expression);
+      return this.toConstantDependency(parser, value)(expression);
     }
   }
 
   radpackCall(parser, expression, force = false) {
     let exp;
-    const argument = expression.arguments[0];
-    if (argument.type === 'Literal') {
-      const value = argument.value;
+    const source = this.v4
+      ? expression.arguments[0]
+      : expression.source;
+    if (source && source.type === 'Literal') {
+      const value = source.value;
       exp = this.getExport(value);
       if (!exp && force) {
         exp = value;
       }
     }
     if (exp) {
-      RadpackPlugin.getModuleBuildInfo(parser.state.current).dynamics.add(this.getRelative(exp));
-      return ParserHelpers.toConstantDependencyWithWebpackRequire(parser, `${ RUNTIME_DYNAMIC }(${ JSON.stringify(exp) })`)(expression);
+      this.getModuleBuildInfo(parser.state.current).dynamics.add(this.getRelative(exp));
+      return this.toConstantDependency(parser, `${ RUNTIME_DYNAMIC }(${ JSON.stringify(exp) })`)(expression);
     }
   }
 
@@ -343,8 +443,8 @@ class RadpackPlugin {
     if (argument.type === 'Literal') {
       const exp = this.getExport(argument.value);
       if (exp) {
-        RadpackPlugin.getModuleBuildInfo(parser.state.current).statics.add(this.getRelative(exp));
-        return ParserHelpers.toConstantDependencyWithWebpackRequire(parser, `${ RUNTIME_STATIC }(${ JSON.stringify(exp) })`)(expression);
+        this.getModuleBuildInfo(parser.state.current).statics.add(this.getRelative(exp));
+        return this.toConstantDependency(parser, `${ RUNTIME_STATIC }(${ JSON.stringify(exp) })`)(expression);
       }
     }
   }
@@ -354,16 +454,35 @@ class RadpackPlugin {
     const chunksById = {};
     const runtimeChunksById = {};
     const runtimeOnlyChunksById = {};
+    const chunkGraph = compilation.chunkGraph;
     compilation.chunks.forEach(chunk => {
-      // Only add logic around JS entries
-      if (chunk.entryModule && !chunk.entryModule.identifier().match(this.options.test)) {
-        return;
-      }
-      chunksById[chunk.id] = chunk;
-      if (chunk.hasRuntime()) {
-        runtimeChunksById[chunk.id] = chunk;
-        if (!chunk.hasEntryModule()) {
-          runtimeOnlyChunksById[chunk.id] = chunk;
+      if (this.v4) {
+        // Only add logic around JS entries
+        if (chunk.entryModule && !chunk.entryModule.identifier().match(this.options.test)) {
+          return;
+        }
+        chunksById[chunk.id] = chunk;
+        if (chunk.hasRuntime()) {
+          runtimeChunksById[chunk.id] = chunk;
+          if (!chunk.hasEntryModule()) {
+            runtimeOnlyChunksById[chunk.id] = chunk;
+          }
+        }
+      } else {
+        // Only add logic around JS entries
+        let hasEntryModule = false;
+        for (const entryModule of chunkGraph.getChunkEntryModulesIterable(chunk)) {
+          hasEntryModule = true;
+          if (!entryModule.resource.match(this.options.test)) {
+            return;
+          }
+        }
+        chunksById[chunk.id] = chunk;
+        if (chunk.runtime) {
+          runtimeChunksById[chunk.id] = chunk;
+          if (!hasEntryModule) {
+            runtimeOnlyChunksById[chunk.id] = chunk;
+          }
         }
       }
     });
@@ -373,24 +492,22 @@ class RadpackPlugin {
       .filter(id => id in chunksById && !(id in runtimeOnlyChunksById))
       .map(id => `~/${ RadpackPlugin.getChunkName(chunksById[id]) }`);
     const modulesById = {};
-    compilation.modules.forEach(module => {
-      if (JS_TYPES.includes(module.type)) {
-        modulesById[module.id] = module;
-      }
-    });
+    if (this.v4) {
+      compilation.modules.forEach(module => {
+        if (JS_TYPES.includes(module.type)) {
+          modulesById[module.id] = module;
+        }
+      });
+    }
 
     // Get chunk stats
-    const { chunks } = compilation.getStats().toJson({
-      all: false,
-      chunks: true,
-      chunkModules: true,
-      chunkRelations: true
-    });
+    const { chunks } = compilation.getStats().toJson();
 
     // Generate manifest entries
     const buildExports = [];
     chunks.forEach(({ id, modules, siblings, children }) => {
-      if (!(id in chunksById) || id in runtimeOnlyChunksById) {
+      const runtimeOnly = id in runtimeOnlyChunksById;
+      if (!(id in chunksById) || (this.v4 && runtimeOnly)) {
         // Skip runtime chunks
         return;
       }
@@ -399,20 +516,28 @@ class RadpackPlugin {
       const entry = RadpackPlugin.getChunkName(chunk);
       const statics = new Set(getChunkNames(siblings || []));
       const dynamics = new Set(getChunkNames(children || []));
-      modules.forEach(({ id }) => {
-        const module = modulesById[id];
-        if (module) {
-          const buildInfo = RadpackPlugin.getModuleBuildInfo(module);
+      if (this.v4) {
+        modules.forEach(({ name, id: moduleId = name }) => {
+          const module = modulesById[moduleId];
+          if (module) {
+            const buildInfo = this.getModuleBuildInfo(module);
+            buildInfo.statics.forEach(exp => statics.add(exp));
+            buildInfo.dynamics.forEach(exp => dynamics.add(exp));
+          }
+        });
+      } else {
+        for (const chunkModule of chunkGraph.getChunkModulesIterable(chunk)) {
+          const buildInfo = this.getModuleBuildInfo(chunkModule);
           buildInfo.statics.forEach(exp => statics.add(exp));
           buildInfo.dynamics.forEach(exp => dynamics.add(exp));
         }
-      });
+      }
 
       // Set entry data
       buildExports.push(
         createExport(entry, [
           createEntry({
-            file: isEntry && (chunk.files || []).find(file => file.endsWith('.js')),
+            file: isEntry && !runtimeOnly && Array.from(chunk.files || []).find(file => file.endsWith('.js')),
             statics: [...statics],
             dynamics: [...dynamics]
           }, this.options)
@@ -425,7 +550,7 @@ class RadpackPlugin {
     const manifest = createManifest(mergeExports(buildExports, existing), this.options);
 
     // Write to file
-    compilation.assets[this.options.filename] = new RawSource(JSON.stringify(manifest));
+    compilation.emitAsset(this.options.filename, new RawSource(JSON.stringify(manifest)));
 
     // Replace manifest placeholder in runtime entries
     if (this.options.injectManifest) {
