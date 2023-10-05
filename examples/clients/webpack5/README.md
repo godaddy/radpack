@@ -1,5 +1,5 @@
 # Webpack Client Example
-An example [radpack] client using [webpack@4][webpack-url] to run the [basic library][basic].
+An example [radpack] client using [webpack@5][webpack-url] to run the [basic library][basic].
 
 
 ## Scripts
@@ -12,4 +12,4 @@ An example [radpack] client using [webpack@4][webpack-url] to run the [basic lib
 [config]: ./webpack.config.js
 [basic]: ../../libs/basic/
 [radpack]: ../../../
-[webpack-url]: https://v4.webpack.js.org/
+[webpack-url]: https://webpack.js.org/

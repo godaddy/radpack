@@ -1,5 +1,5 @@
 # Webpack Hydrate App Example
-An example [radpack] application using [webpack@4][webpack-url] and [express][express-url] to run the [basic library][basic].
+An example [radpack] application using [webpack@5][webpack-url] and [express][express-url] to run the [basic library][basic].
 
 
 ## Scripts
@@ -13,5 +13,5 @@ An example [radpack] application using [webpack@4][webpack-url] and [express][ex
 [config]: ./webpack.config.js
 [basic]: ../../libs/basic/
 [radpack]: ../../../
-[webpack-url]: https://v4.webpack.js.org/
+[webpack-url]: https://webpack.js.org/
 [express-url]: https://expressjs.com/
