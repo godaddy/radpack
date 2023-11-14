@@ -555,7 +555,7 @@ class RadpackPlugin {
     const manifest = createManifest(mergeExports(buildExports, existing), this.options);
 
     // Write to file if there are exports
-    if (manifest.exports[this.options.name]) {
+    if (manifest.exports[this.options.filename]) {
       compilation.emitAsset(this.options.filename, new RawSource(JSON.stringify(manifest)));
     }
 
