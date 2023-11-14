@@ -473,7 +473,12 @@ class RadpackPlugin {
         let hasEntryModule = false;
         for (const entryModule of chunkGraph.getChunkEntryModulesIterable(chunk)) {
           hasEntryModule = true;
-          if (!entryModule.resource.match(this.options.test)) {
+
+          // it must be the file types we care about or be made up of multiple dependencies of the file types we care about
+          if (
+            !entryModule.resource?.match(this.options.test) ||
+            !entryModule.dependencies?.every(dep => dep.resource?.match(this.options.test))
+          ) {
             return;
           }
         }
