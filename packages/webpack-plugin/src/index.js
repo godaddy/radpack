@@ -78,6 +78,12 @@ class RadpackPlugin {
     return getRelativeExport(exp, this.options);
   }
 
+  isMatchingResource(chunk) {
+    return !!chunk.resource?.match(this.options.test)
+      || chunk.dependencies?.every(dep => dep.resource?.match(this.options.test))
+      || false;
+  }
+
   apply(compiler) {
     // Set compiler options
     const errors = [];
@@ -296,7 +302,7 @@ class RadpackPlugin {
     } else {
       const chunkGraph = compilation.chunkGraph;
       for (const entryModule of chunkGraph.getChunkEntryModulesIterable(chunk)) {
-        if (!entryModule.resource.match(options.test)) {
+        if (!this.isMatchingResource(entryModule)) {
           return source;
         }
       }
@@ -372,7 +378,7 @@ class RadpackPlugin {
     } else {
       const chunkGraph = compilation.chunkGraph;
       for (const entryModule of chunkGraph.getChunkEntryModulesIterable(chunk)) {
-        if (!entryModule.resource.match(this.options.test)) {
+        if (!this.isMatchingResource(entryModule)) {
           return source;
         }
       }
@@ -473,7 +479,7 @@ class RadpackPlugin {
         let hasEntryModule = false;
         for (const entryModule of chunkGraph.getChunkEntryModulesIterable(chunk)) {
           hasEntryModule = true;
-          if (!entryModule.resource.match(this.options.test)) {
+          if (!this.isMatchingResource(entryModule)) {
             return;
           }
         }
@@ -549,8 +555,10 @@ class RadpackPlugin {
     const existing = Object.values(this.exports).filter(e => e.name === this.options.name);
     const manifest = createManifest(mergeExports(buildExports, existing), this.options);
 
-    // Write to file
-    compilation.emitAsset(this.options.filename, new RawSource(JSON.stringify(manifest)));
+    // Write to file if there are exports
+    if (this.options.filename in manifest.exports) {
+      compilation.emitAsset(this.options.filename, new RawSource(JSON.stringify(manifest)));
+    }
 
     // Replace manifest placeholder in runtime entries
     if (this.options.injectManifest) {
