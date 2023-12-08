@@ -560,7 +560,10 @@ class RadpackPlugin {
     const existing = Object.values(this.exports).filter(e => e.name === this.options.name);
     const manifest = createManifest(mergeExports(buildExports, existing), this.options);
 
-    compilation.emitAsset(this.options.filename, new RawSource(JSON.stringify(manifest)));
+    // Write to file if there are exports
+    if (this.options.name in manifest.exports) {
+      compilation.emitAsset(this.options.filename, new RawSource(JSON.stringify(manifest)));
+    }
 
     // Replace manifest placeholder in runtime entries
     if (this.options.injectManifest) {
