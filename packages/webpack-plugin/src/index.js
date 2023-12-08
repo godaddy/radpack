@@ -301,6 +301,11 @@ class RadpackPlugin {
       }
     } else {
       const chunkGraph = compilation.chunkGraph;
+
+      if (!chunkGraph) {
+        return source;
+      }
+
       for (const entryModule of chunkGraph.getChunkEntryModulesIterable(chunk)) {
         if (!this.isMatchingResource(entryModule)) {
           return source;
@@ -555,10 +560,7 @@ class RadpackPlugin {
     const existing = Object.values(this.exports).filter(e => e.name === this.options.name);
     const manifest = createManifest(mergeExports(buildExports, existing), this.options);
 
-    // Write to file if there are exports
-    if (this.options.filename in manifest.exports) {
-      compilation.emitAsset(this.options.filename, new RawSource(JSON.stringify(manifest)));
-    }
+    compilation.emitAsset(this.options.filename, new RawSource(JSON.stringify(manifest)));
 
     // Replace manifest placeholder in runtime entries
     if (this.options.injectManifest) {
