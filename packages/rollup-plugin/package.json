@@ -8,7 +8,8 @@
     ".": {
       "import": "./lib/index.esm.js",
       "require": "./lib/index.cjs.js"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "files": [
     "lib/"
@@ -32,7 +33,7 @@
   },
   "dependencies": {
     "@radpack/build": "^1.0.5",
-    "acorn-walk": "^8.2.0",
+    "acorn-walk": "^8.3.3",
     "magic-string": "^0.25.9"
   },
   "devDependencies": {
@@ -40,9 +41,9 @@
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-node-resolve": "^13.3.0",
-    "acorn": "^8.8.0",
+    "acorn": "^8.12.1",
     "rimraf": "^3.0.2",
-    "rollup": "^2.78.1"
+    "rollup": "^2.79.1"
   },
   "license": "MIT"
 }

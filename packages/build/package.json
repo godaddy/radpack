@@ -8,7 +8,8 @@
     ".": {
       "import": "./src/index.js",
       "require": "./lib/index.js"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "files": [
     "src/",
@@ -32,10 +33,10 @@
   },
   "dependencies": {
     "find-up": "^5.0.0",
-    "semver": "^7.3.7"
+    "semver": "^7.6.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.18.10",
+    "@babel/cli": "^7.24.7",
     "@radpack/core": "^1.0.5",
     "rimraf": "^3.0.2"
   },
