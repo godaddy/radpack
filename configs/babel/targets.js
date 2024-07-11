@@ -1,6 +1,6 @@
 module.exports = {
   node: {
-    node: '12'
+    node: '18'
   },
   browser: {
     browsers: [

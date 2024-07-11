@@ -13,9 +13,9 @@
     "@radpack/core": "^1.0.5",
     "@radpack/rollup-plugin": "^1.0.5",
     "dirsum": "^0.1.1",
-    "nodemon": "^2.0.19",
+    "nodemon": "^2.0.22",
     "rimraf": "^3.0.2",
-    "rollup": "^2.78.1"
+    "rollup": "^2.79.1"
   },
   "optionalDependencies": {
     "@radpack/example-logger-lib": "^1.0.0"

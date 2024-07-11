@@ -10,9 +10,9 @@
   "dependencies": {
     "@radpack/cli": "^1.0.7",
     "@radpack/client": "^1.0.5",
-    "@radpack/webpack-plugin": "^1.0.7",
+    "@radpack/webpack-plugin": "^1.1.2",
     "rimraf": "^3.0.2",
-    "webpack": "^5.88.2",
+    "webpack": "^5.92.1",
     "webpack-cli": "^5.1.4"
   },
   "optionalDependencies": {

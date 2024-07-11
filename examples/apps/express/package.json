@@ -10,7 +10,7 @@
   "dependencies": {
     "@radpack/core": "^1.0.5",
     "@radpack/server": "^1.1.3",
-    "express": "^4.18.1",
+    "express": "^4.19.2",
     "opener": "^1.5.2"
   },
   "optionalDependencies": {
