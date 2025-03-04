@@ -137,6 +137,9 @@ export default class extends Radpack {
         } catch (e) {
           reject(e);
         }
+      }).catch(err => {
+        this._removeCache(cache);
+        throw err;
       });
     }
     if (!isFile) {
@@ -241,10 +244,10 @@ export default class extends Radpack {
 
   _clearCache() {
     const now = Date.now();
-    this._cache.forEach((cache, key) => {
+    this._cache.forEach((cache) => {
       // Delete expired load caches
       if (cache.load && now - cache.time > DEFAULT_EXPIRE) {
-        this._cache.delete(key);
+        this._removeCache(cache);
       }
     });
   }
