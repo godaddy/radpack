@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "connect": "^3.7.0",
-    "cross-spawn": "^7.0.3",
+    "cross-spawn": "^7.0.6",
     "glob": "^7.2.3",
     "opener": "^1.5.2",
     "serve-static": "^1.15.0",
@@ -45,7 +45,7 @@
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "rimraf": "^3.0.2",
-    "rollup": "^2.79.1"
+    "rollup": "^2.79.2"
   },
   "license": "MIT"
 }
