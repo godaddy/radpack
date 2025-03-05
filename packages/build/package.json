@@ -1,6 +1,6 @@
 {
   "name": "@radpack/build",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Rapid Application Development Packaging Build Core",
   "main": "./lib/index.js",
   "module": "./src/index.js",
@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.26.4",
-    "@radpack/core": "^1.0.5",
+    "@radpack/core": "^1.0.6",
     "rimraf": "^3.0.2"
   },
   "license": "MIT"
