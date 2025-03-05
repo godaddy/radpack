@@ -1,6 +1,6 @@
 {
   "name": "@radpack/core",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Rapid Application Development Packaging Core",
   "main": "./lib/index.js",
   "module": "./src/index.js",
@@ -35,10 +35,10 @@
   },
   "dependencies": {
     "abort-controller": "^3.0.0",
-    "cross-fetch": "^3.1.8"
+    "cross-fetch": "^3.2.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.24.7",
+    "@babel/cli": "^7.26.4",
     "@sinonjs/fake-timers": "^9.1.2",
     "rimraf": "^3.0.2"
   },

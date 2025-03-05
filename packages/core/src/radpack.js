@@ -317,6 +317,7 @@ export default class Radpack extends class extends Function {
   _setCache(cache, handler, prop = 'load') {
     return prop in cache ? cache[prop] : (cache[prop] = Promise.resolve().then(handler).catch(err => {
       delete cache[prop];
+      this._removeCache(cache);
       err.message = `setCache.${ prop } '${ cache.key }': ${ err.message }`;
       throw err;
     }));
@@ -324,5 +325,9 @@ export default class Radpack extends class extends Function {
 
   _setRegisters() {
     // Defined in client/server
+  }
+
+  _removeCache(cache) {
+    this._cache.delete(cache.key);
   }
 }

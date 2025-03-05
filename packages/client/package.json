@@ -1,6 +1,6 @@
 {
   "name": "@radpack/client",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Rapid Application Development Packaging Client Runtime",
   "main": "./lib/index.cjs.js",
   "module": "./lib/index.esm.js",
@@ -40,11 +40,11 @@
     }
   },
   "devDependencies": {
-    "@radpack/core": "^1.0.5",
+    "@radpack/core": "^1.0.6",
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "rimraf": "^3.0.2",
-    "rollup": "^2.79.1",
+    "rollup": "^2.79.2",
     "rollup-plugin-terser": "^7.0.2"
   },
   "license": "MIT"
