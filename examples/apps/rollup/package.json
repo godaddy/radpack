@@ -10,11 +10,11 @@
     "start": "node ."
   },
   "dependencies": {
-    "@radpack/core": "^1.0.5",
-    "@radpack/server": "^1.1.3"
+    "@radpack/core": "^1.0.6",
+    "@radpack/server": "^1.1.4"
   },
   "devDependencies": {
-    "@radpack/rollup-plugin": "^1.0.5",
+    "@radpack/rollup-plugin": "^1.0.6",
     "rimraf": "^3.0.2",
     "rollup": "^2.79.2"
   },
