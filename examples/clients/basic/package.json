@@ -7,8 +7,8 @@
     "start": "radpack local --statics ../../ --open \"${RADPACK_STATICS}/clients/basic/\""
   },
   "dependencies": {
-    "@radpack/cli": "^1.0.7",
-    "@radpack/client": "^1.0.5"
+    "@radpack/cli": "^1.0.8",
+    "@radpack/client": "^1.0.6"
   },
   "optionalDependencies": {
     "@radpack/example-basic-lib": "^1.0.0",

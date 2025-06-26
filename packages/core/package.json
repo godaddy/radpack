@@ -1,6 +1,6 @@
 {
   "name": "@radpack/core",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Rapid Application Development Packaging Core",
   "main": "./lib/index.js",
   "module": "./src/index.js",
@@ -38,7 +38,7 @@
     "cross-fetch": "^3.2.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.26.4",
+    "@babel/cli": "^7.27.2",
     "@sinonjs/fake-timers": "^9.1.2",
     "rimraf": "^3.0.2"
   },
