@@ -39,7 +39,7 @@
     "eslint-config-godaddy": "^6.1.0",
     "find-up": "^5.0.0",
     "glob": "^7.2.3",
-    "lerna": "^5.6.2",
+    "lerna": "^9.0.1",
     "ninos": "^3.0.0",
     "nyc": "^15.1.0",
     "proxyquire": "^2.1.3",
