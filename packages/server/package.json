@@ -2,6 +2,18 @@
   "name": "@radpack/server",
   "version": "1.1.5",
   "description": "Rapid Application Development Packaging Server Runtime",
+  "keywords": [
+    "radpack",
+    "server",
+    "ssr",
+    "server-side-rendering",
+    "node",
+    "runtime",
+    "module-loader",
+    "middleware",
+    "hydration",
+    "isomorphic"
+  ],
   "main": "./lib/index.cjs.js",
   "module": "./lib/index.esm.js",
   "exports": {

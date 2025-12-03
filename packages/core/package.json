@@ -2,6 +2,17 @@
   "name": "@radpack/core",
   "version": "1.0.7",
   "description": "Rapid Application Development Packaging Core",
+  "keywords": [
+    "radpack",
+    "module-loader",
+    "dynamic-import",
+    "code-splitting",
+    "runtime",
+    "amd",
+    "graph-based-loading",
+    "dependency-graph",
+    "resource-sharing"
+  ],
   "main": "./lib/index.js",
   "module": "./src/index.js",
   "exports": {

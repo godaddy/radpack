@@ -2,6 +2,18 @@
   "name": "@radpack/client",
   "version": "1.0.7",
   "description": "Rapid Application Development Packaging Client Runtime",
+  "keywords": [
+    "radpack",
+    "browser",
+    "client",
+    "runtime",
+    "module-loader",
+    "dynamic-import",
+    "amd",
+    "lazy-loading",
+    "code-splitting",
+    "frontend"
+  ],
   "main": "./lib/index.cjs.js",
   "module": "./lib/index.esm.js",
   "browser": "./lib/browser.js",

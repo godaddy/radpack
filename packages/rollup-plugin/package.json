@@ -2,6 +2,16 @@
   "name": "@radpack/rollup-plugin",
   "version": "1.0.7",
   "description": "Rapid Application Development Packaging Rollup Plugin",
+  "keywords": [
+    "radpack",
+    "rollup",
+    "rollup-plugin",
+    "library",
+    "esm",
+    "build-tool",
+    "shared-dependencies",
+    "module-loader"
+  ],
   "main": "./lib/index.cjs.js",
   "module": "./lib/index.esm.js",
   "exports": {
