@@ -2,6 +2,18 @@
   "name": "@radpack/webpack-plugin",
   "version": "1.1.4",
   "description": "Rapid Application Development Packaging Webpack Plugin",
+  "keywords": [
+    "radpack",
+    "webpack",
+    "webpack-plugin",
+    "webpack4",
+    "webpack5",
+    "application",
+    "code-splitting",
+    "build-tool",
+    "dynamic-import",
+    "resource-sharing"
+  ],
   "main": "./lib/index.cjs.js",
   "module": "./lib/index.esm.js",
   "exports": {

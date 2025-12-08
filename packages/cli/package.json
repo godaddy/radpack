@@ -2,6 +2,16 @@
   "name": "@radpack/cli",
   "version": "1.0.9",
   "description": "Rapid Application Development Packaging CLI",
+  "keywords": [
+    "radpack",
+    "cli",
+    "command-line",
+    "dev-server",
+    "local-server",
+    "registry",
+    "merge",
+    "development"
+  ],
   "bin": {
     "radpack": "./lib/index.js"
   },

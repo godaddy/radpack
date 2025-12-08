@@ -2,6 +2,18 @@
   "name": "@radpack/build",
   "version": "1.0.7",
   "description": "Rapid Application Development Packaging Build Core",
+  "keywords": [
+    "radpack",
+    "build",
+    "bundler",
+    "webpack",
+    "rollup",
+    "manifest",
+    "registry",
+    "exports",
+    "semver",
+    "build-tool"
+  ],
   "main": "./lib/index.js",
   "module": "./src/index.js",
   "exports": {
