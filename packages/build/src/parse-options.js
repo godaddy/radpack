@@ -31,10 +31,16 @@ export default options => {
     return config;
   });
   parsed.partials = toArray(partials);
-  parsed.dependencies = {
+  const rawDeps = {
     ...pkg.devDependencies,
     ...pkg.dependencies,
     ...pkg.peerDependencies
   };
+  parsed.dependencies = Object.fromEntries(
+    Object.entries(rawDeps).map(([name, ver]) => [
+      name,
+      ver.startsWith('workspace:') ? ver.slice('workspace:'.length) : ver
+    ])
+  );
   return parsed;
 };
