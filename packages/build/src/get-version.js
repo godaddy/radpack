@@ -12,6 +12,15 @@ export default (exp, options) => {
       // latest, use latest at build-time
       version = '';
     }
+    if (version === '^' || version === '~') {
+      // bare prefix (from workspace:^ or workspace:~), use latest at build-time with prefix
+      const prefix = version;
+      const latest = exp.versions[0];
+      if (!latest) return;
+      const p = parseVersionArray(latest.version.toArray());
+      if (p.release) return p.release;
+      return prefix === '~' ? p.tilde : p.caret;
+    }
   }
   const match = version
     ? exp.versions.find(e => e.version.satisfies(version))

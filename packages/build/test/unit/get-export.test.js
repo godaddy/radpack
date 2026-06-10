@@ -63,3 +63,13 @@ test('returns non-versioned dependency', t => {
 test('returns already versioned dependency', t => {
   t.is(t.context.getExport('lodash@5'), 'lodash@5');
 });
+
+test('handles bare ^ prefix (workspace:^)', t => {
+  t.context.options.dependencies.lodash = '^';
+  t.is(t.context.getExport('lodash'), 'lodash@^4');
+});
+
+test('handles bare ~ prefix (workspace:~)', t => {
+  t.context.options.dependencies.lodash = '~';
+  t.is(t.context.getExport('lodash'), 'lodash@~4');
+});
